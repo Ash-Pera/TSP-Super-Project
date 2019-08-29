@@ -117,13 +117,11 @@
   <ItemGroup>
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="nodeAndDist.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="nodeAndDist.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>
