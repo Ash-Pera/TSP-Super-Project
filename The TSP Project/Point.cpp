@@ -14,7 +14,7 @@ double Point::euclidianDistance(const Point & p1, const Point & p2) {
 }
 
 std::ostream & operator << (std::ostream &out, const Point &p) {
-	out << "(" << p.x << ", " << p.y << ")";
+	out << "(" << p.x << ", " << p.y << ") ";
 	return out;
 }
 

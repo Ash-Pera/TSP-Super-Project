@@ -3,7 +3,8 @@
 
 struct Point {
 public:
-	const double x, y;
+	double x, y;
+	Point() {};
 	Point(double x, double y);
 	double distanceTo(const Point& p) const;
 
