@@ -35,7 +35,7 @@ Cycle exaustiveSearch(Graph graph) {
 
 	Cycle minCycle = allCycles.front();
 	for (Cycle cycle : allCycles) {
-		if (cycle.distance() < minCycle.distance()) {
+		if (cycle.length() < minCycle.length()) {
 			minCycle = cycle;
 		}
 	}
