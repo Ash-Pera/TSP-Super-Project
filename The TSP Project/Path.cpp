@@ -8,29 +8,36 @@ Path::Path() {
 
 Path::Path(std::vector<Point> ps): points(ps){}
 
+// amortized const time
 void Path::addPoint(Point p) {
 	points.push_back(p);
 }
 
-double Path::distance() const{
-	double dist = 0;
-	if (points.size() <= 1)
+// n time
+double Path::length() const{
+	if (points.size() <= 1) {
 		return 0;
+	}
+
+	double dist = 0;
 	for (unsigned int i = 0; i < points.size() - 1; i++) {
 		dist += Point::euclidianDistance(points[i], points[i + 1]);
 	}
+
 	return dist;
 }
 
-
+// const time
 Point Path::getLastPoint() const {
 	return points.back();
 }
 
+// n time
 bool Path::containsPoint(Point p) const {
 	return std::find(points.begin(), points.end(), p) != points.end();
 }
 
+// amortized const time
 Path Path::operator+(const Point & p) {
 	Path newPath = *this;
 	newPath.addPoint(p);
@@ -39,7 +46,7 @@ Path Path::operator+(const Point & p) {
 
 
 std::ostream & operator << (std::ostream &out, const Path &p) {
-	out << "Path of length " << p.distance() << ": ";
+	out << "Path of length " << p.length() << ": ";
 	for (Point point : p.points) {
 		out << point;
 	}

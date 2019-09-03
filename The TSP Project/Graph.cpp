@@ -23,14 +23,17 @@ Graph::Graph(std::unordered_set<Point> points) : points(points) {
 
 }
 
+// runs in n time
+// there's probably a better way that runs in log n
 Point Graph::getNearestPoint(Point p) const {
 	return getPointsByDistance(p).front();
 }
 
 
-
+// runs in n time
 std::vector<Point> Graph::getPointsByDistance(Point p) const {
 	auto sorted = std::vector<Point>();
+	sorted.reserve(getNumberPoints());
 	for (Point point : points) {
 		sorted.push_back(point);
 	}
@@ -40,7 +43,7 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 }
 
 
-
+// const time
 unsigned int Graph::getNumberPoints() const {
 	return points.size();
 }

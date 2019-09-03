@@ -5,19 +5,21 @@
 class Cycle;
 
 class Path {
-private:
+protected:
 	std::vector<Point> points;
 public:
 	Path();
 	Path(std::vector<Point>);
 	void addPoint(Point);
-	virtual double distance() const;
+	virtual double length() const;
 	int numberOfPoints() const { return points.size(); };
 	Point getLastPoint() const;
 	bool containsPoint(Point) const;
 
 	friend std::ostream & operator << (std::ostream &out, const Path &p);
 	Path operator+(const Point&);
+
+	bool operator<(const Path& p2) { return this->length() < p2.length(); }
 
 	friend class Cycle;
 };

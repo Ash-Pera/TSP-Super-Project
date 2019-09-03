@@ -1,12 +1,11 @@
 #include "Graph.h"
 #include "Cycle.h"
-#include <unordered_set>
+#include <set>
+#include <chrono> 
 
-
-// CALCULTATING CYCLE LENGTH INCORRECLYT
-
+// n^2 or n^3 time
 Cycle greedyCycle(Graph g) {
-	auto visited = std::unordered_set<Point>();
+	auto visited = std::set<Point>();
 	Cycle cycle;
 
 	//pick a random point to start
@@ -14,10 +13,17 @@ Cycle greedyCycle(Graph g) {
 	cycle.addPoint(start);
 	visited.insert(start);
 
+	// n time
 	while (visited.size() < g.getNumberPoints()) {
+		// n time
+						// n time
 		for (Point p : g.getPointsByDistance(cycle.getLastPoint())) {
-			if (visited.count(p) == 0) {//unvisited
+
+				// log n
+			if (!visited.contains(p)) {//unvisited
+				// am const time
 				cycle.addPoint(p);
+				// avg const time
 				visited.insert(p);
 				break;
 			}
@@ -66,17 +72,41 @@ Cycle exaustiveCycle(Graph graph) {
 	return minCycle;
 }
 
+using namespace std::chrono;
+void timeExaustiveCycles(int sizeOfGraph, int numberOfTimes) {
+	for (int i = 0; i < numberOfTimes; i++) {
+		Graph graph = Graph(sizeOfGraph);
+
+		auto start = high_resolution_clock::now();
+		Cycle exaustive = exaustiveCycle(graph);
+		auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+
+		std::cout << sizeOfGraph << ", " << duration.count() << std::endl;
+	}
+}
+
+void timeGreedyCycles(int sizeOfGraph, int numberOfTimes) {
+	for (int i = 0; i < numberOfTimes; i++) {
+		Graph graph = Graph(sizeOfGraph);
+
+		auto start = high_resolution_clock::now();
+		Cycle greedy = greedyCycle(graph);
+		auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+
+		std::cout << sizeOfGraph << ", " << duration.count() << std::endl;
+	}
+}
 
 
 
 int main(int argc, char *argv[]) { 
-	Graph graph = Graph(8);
+	//std::cout.imbue(std::locale(""));
 
-	Cycle greedy = greedyCycle(graph);
-	std::cout << greedy << std::endl;
+	/*for (int i = 1; i < 1000; i+=10) {
+		timeGreedyCycles(i, 10);
+	}*/
+	timeExaustiveCycles(12, 10);
 
-	Cycle best = exaustiveCycle(graph);
-	std::cout << best;
 
 	std::cin.get();
 

@@ -16,6 +16,10 @@ public:
 		return (this->x == otherpoint.x && 
 			this->y == otherpoint.y);
 	}
+
+	friend bool operator <(const Point& lhs, const Point& rhs){
+		return lhs.x < rhs.x;
+	}
 };
 
 namespace std {
