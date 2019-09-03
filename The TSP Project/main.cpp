@@ -20,7 +20,8 @@ Cycle greedySearch(Graph g) {
 		for (Point p : g.getPointsByDistance(cycle.getLastPoint())) {
 
 				// log n
-			if (!visited.contains(p)) {//unvisited
+			if (visited.count(p) == 0) { //unvisted
+			//if (!visited.contains(p)) { c++20
 				// am const time
 				cycle.addPoint(p);
 				// avg const time
