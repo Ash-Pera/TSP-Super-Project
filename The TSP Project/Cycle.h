@@ -5,7 +5,7 @@ class Cycle :
 public:
 	Cycle();
 	Cycle(Path);
-	double distance() const;
+	double length() const;
 
 };
 

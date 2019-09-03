@@ -29,7 +29,9 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 
 	// pick a random point to start and make a path with just that point
 	Point start = getNearestPoint(Point(0.5, 0.5));
-	Path startingPath = Path({ start });
+	Path startingPath = Path();
+
+	startingPath.addPoint(start);
 
 	recursiveReduceOverAllCycles(reductionFunction, startingPath, &bestSoFar);
 	return bestSoFar;
