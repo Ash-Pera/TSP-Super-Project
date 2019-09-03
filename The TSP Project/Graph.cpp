@@ -5,7 +5,8 @@
 
 
 
-void Graph::recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2), Path startingPath, Cycle* out)
+void Graph::recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2),
+	Path startingPath, Cycle* out) const
 {
 	//do reduction if cycle is compleate
 	if (startingPath.numberOfPoints() == getNumberPoints()) {
@@ -22,7 +23,7 @@ void Graph::recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c
 }
 
 
-Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2))
+Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2)) const
 {
 	Cycle bestSoFar = getGreedyCycle();
 
@@ -35,7 +36,7 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 
 }
 
-Cycle Graph::getGreedyCycle()
+Cycle Graph::getGreedyCycle() const
 {
 	auto visited = std::set<Point>();
 	Cycle cycle;

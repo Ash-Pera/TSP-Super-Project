@@ -12,7 +12,7 @@ class Graph {
 private:
 	std::unordered_set<Point> points;
 	void recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2),
-		Path startingPath, Cycle* out);
+		Path startingPath, Cycle* out) const;
 
 public:
 	Graph(unsigned int);
@@ -22,8 +22,8 @@ public:
 	unsigned int getNumberPoints() const;
 	std::vector<Point> getPointsByDistance(Point p) const;
 
-	Cycle reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2));
-	Cycle getGreedyCycle();
+	Cycle reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2)) const;
+	Cycle getGreedyCycle() const;
 
 	//std::unordered_set<Point> getPoints() const;
 
