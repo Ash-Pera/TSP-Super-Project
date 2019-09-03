@@ -98,15 +98,27 @@ void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 }
 
 
+Cycle shorterCycle(const Cycle c1, const Cycle c2) {
+	if (c1.length() < c2.length()) {
+		return c1;
+	}
+	else {
+		return c2;
+	}
+}
+
 
 int main(int argc, char *argv[]) { 
 	//std::cout.imbue(std::locale(""));
 
-	//for (int i = 1; i < 1000; i+=10) {
-		timeGreedySearch(10, 10);
-	//}
-	//timeExaustiveSearch(12, 10);
+	Graph graph = Graph(6);
 
+	Cycle oldBest = exaustiveSearch(graph);
+
+	Cycle newBest = graph.reduceOverAllCycles(shorterCycle);
+	std::cout << "old "<<oldBest << std::endl << std::endl;
+	
+	std::cout << newBest;
 
 	std::cin.get();
 
