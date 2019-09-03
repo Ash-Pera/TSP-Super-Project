@@ -1,7 +1,54 @@
 #include "Graph.h"
 
 #include <Random>
+#include <set>
 
+
+
+void Graph::recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2), Path startingPath, Cycle* out)
+{
+	//do reduction if cycle is compleate
+	if (startingPath.numberOfPoints() == getNumberPoints()) {
+		*out = reductionFunction(*out, Cycle(startingPath));
+		return;
+	}
+	 
+	// otherwise recurse
+	for (Point p : getPointsByDistance(startingPath.getLastPoint())) {
+		if (!startingPath.containsPoint(p)) {
+			recursiveReduceOverAllCycles(reductionFunction, startingPath + p, out);
+		}
+	}
+}
+
+
+Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2))
+{
+
+}
+
+Cycle Graph::getGreedyCycle()
+{
+	auto visited = std::set<Point>();
+	Cycle cycle;
+
+	//pick a random point to start
+	Point start = getNearestPoint(Point(0.5, 0.5));
+	cycle.addPoint(start);
+	visited.insert(start);
+
+	while (visited.size() < getNumberPoints()) {
+		for (Point p : getPointsByDistance(cycle.getLastPoint())) {
+			if (visited.count(p) == 0) { //unvisted
+				cycle.addPoint(p);
+				visited.insert(p);
+				break;
+			}
+		}
+	}
+
+	return cycle;
+}
 
 
 
@@ -19,9 +66,7 @@ Graph::Graph(unsigned int numberOfNodes) {
 }
 
 
-Graph::Graph(std::unordered_set<Point> points) : points(points) {
-
-}
+Graph::Graph(std::unordered_set<Point> points) : points(points) { }
 
 // runs in n time
 // there's probably a better way that runs in log n
@@ -45,7 +90,7 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 
 // const time
 unsigned int Graph::getNumberPoints() const {
-	return points.size();
+	return (int)points.size();
 }
 
 std::ostream & operator << (std::ostream &out, const Graph &g) {

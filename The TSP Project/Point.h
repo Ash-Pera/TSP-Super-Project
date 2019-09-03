@@ -4,7 +4,7 @@
 struct Point {
 public:
 	double x, y;
-	Point() {};
+	Point() { x = 0; y = 0; };
 	Point(double x, double y);
 	double distanceTo(const Point& p) const;
 

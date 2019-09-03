@@ -18,7 +18,6 @@ Cycle greedySearch(Graph g) {
 		// n time
 						// n time
 		for (Point p : g.getPointsByDistance(cycle.getLastPoint())) {
-
 				// log n
 			if (visited.count(p) == 0) { //unvisted
 			//if (!visited.contains(p)) { c++20
@@ -103,10 +102,10 @@ void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 int main(int argc, char *argv[]) { 
 	//std::cout.imbue(std::locale(""));
 
-	/*for (int i = 1; i < 1000; i+=10) {
-		timeGreedyCycles(i, 10);
-	}*/
-	timeExaustiveSearch(12, 10);
+	//for (int i = 1; i < 1000; i+=10) {
+		timeGreedySearch(10, 10);
+	//}
+	//timeExaustiveSearch(12, 10);
 
 
 	std::cin.get();

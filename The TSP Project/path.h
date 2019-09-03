@@ -12,7 +12,7 @@ public:
 	Path(std::vector<Point>);
 	void addPoint(Point);
 	virtual double length() const;
-	int numberOfPoints() const { return points.size(); };
+	int numberOfPoints() const { return (int)points.size(); };
 	Point getLastPoint() const;
 	bool containsPoint(Point) const;
 
