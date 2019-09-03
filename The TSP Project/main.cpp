@@ -4,7 +4,7 @@
 #include <chrono> 
 
 // n^2 or n^3 time
-Cycle greedyCycle(Graph g) {
+Cycle greedySearch(Graph g) {
 	auto visited = std::set<Point>();
 	Cycle cycle;
 
@@ -60,7 +60,7 @@ std::vector<Cycle> enumerateAllCycles(Graph graph) {
 }
 
 
-Cycle exaustiveCycle(Graph graph) {
+Cycle exaustiveSearch(Graph graph) {
 	std::vector<Cycle>  allCycles = enumerateAllCycles(graph);
 
 	Cycle minCycle = allCycles.front();
@@ -73,24 +73,24 @@ Cycle exaustiveCycle(Graph graph) {
 }
 
 using namespace std::chrono;
-void timeExaustiveCycles(int sizeOfGraph, int numberOfTimes) {
+void timeExaustiveSearch(int sizeOfGraph, int numberOfTimes) {
 	for (int i = 0; i < numberOfTimes; i++) {
 		Graph graph = Graph(sizeOfGraph);
 
 		auto start = high_resolution_clock::now();
-		Cycle exaustive = exaustiveCycle(graph);
+		Cycle exaustive = exaustiveSearch(graph);
 		auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
 
 		std::cout << sizeOfGraph << ", " << duration.count() << std::endl;
 	}
 }
 
-void timeGreedyCycles(int sizeOfGraph, int numberOfTimes) {
+void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 	for (int i = 0; i < numberOfTimes; i++) {
 		Graph graph = Graph(sizeOfGraph);
 
 		auto start = high_resolution_clock::now();
-		Cycle greedy = greedyCycle(graph);
+		Cycle greedy = greedySearch(graph);
 		auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
 
 		std::cout << sizeOfGraph << ", " << duration.count() << std::endl;
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
 	/*for (int i = 1; i < 1000; i+=10) {
 		timeGreedyCycles(i, 10);
 	}*/
-	timeExaustiveCycles(12, 10);
+	timeExaustiveSearch(12, 10);
 
 
 	std::cin.get();
