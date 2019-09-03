@@ -3,36 +3,6 @@
 #include <set>
 #include <chrono> 
 
-// n^2 or n^3 time
-Cycle greedySearch(Graph g) {
-	auto visited = std::set<Point>();
-	Cycle cycle;
-
-	//pick a random point to start
-	Point start = g.getNearestPoint(Point(0.5, 0.5));
-	cycle.addPoint(start);
-	visited.insert(start);
-
-	// n time
-	while (visited.size() < g.getNumberPoints()) {
-		// n time
-						// n time
-		for (Point p : g.getPointsByDistance(cycle.getLastPoint())) {
-				// log n
-			if (visited.count(p) == 0) { //unvisted
-			//if (!visited.contains(p)) { c++20
-				// am const time
-				cycle.addPoint(p);
-				// avg const time
-				visited.insert(p);
-				break;
-			}
-		}
-	}
-
-	return cycle;
-}
-
 
 void recursiveEnumerateAllCycles(Path startingPath, Graph& graph, std::vector<Cycle>& out) {
 	if (startingPath.numberOfPoints() == graph.getNumberPoints()) {
@@ -90,7 +60,7 @@ void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 		Graph graph = Graph(sizeOfGraph);
 
 		auto start = high_resolution_clock::now();
-		Cycle greedy = greedySearch(graph);
+		Cycle greedy = graph.getGreedyCycle();
 		auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
 
 		std::cout << sizeOfGraph << ", " << duration.count() << std::endl;
