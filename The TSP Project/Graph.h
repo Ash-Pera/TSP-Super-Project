@@ -18,13 +18,14 @@ public:
 	Graph(unsigned int);
 	Graph(std::unordered_set<Point>);
 
-	Point getNearestPoint(Point p) const;
-	unsigned int getNumberPoints() const;
-	std::vector<Point> getPointsByDistance(Point p) const;
-
-	Cycle reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2)) const;
+	unsigned int getNumberOfPoints() const;
+	Point getNearestPoint(Point) const;
+	std::vector<Point> getPointsByDistance(Point) const;
+	
+	Cycle getGreedyCycle(const Point&) const;
 	Cycle getGreedyCycle() const;
+	Cycle reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2)) const;
 
-	friend std::ostream & operator << (std::ostream &out, const Graph &g);
+	friend std::ostream& operator << (std::ostream &out, const Graph &g);
 };
 

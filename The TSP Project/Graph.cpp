@@ -26,7 +26,7 @@ Graph::Graph(std::unordered_set<Point> points) : points(points) { }
 // runs in n time
 std::vector<Point> Graph::getPointsByDistance(Point p) const {
 	auto sorted = std::vector<Point>();
-	sorted.reserve(getNumberPoints());
+	sorted.reserve(getNumberOfPoints());
 	for (Point point : points) {
 		sorted.push_back(point);
 	}
@@ -37,7 +37,7 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 
 
 // const time
-unsigned int Graph::getNumberPoints() const {
+unsigned int Graph::getNumberOfPoints() const {
 	return (int) points.size();
 }
 
@@ -46,7 +46,7 @@ unsigned int Graph::getNumberPoints() const {
 void Graph::recursiveReduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2),
 	Path startingPath, Cycle* out) const {
 	//do reduction if cycle is compleate
-	if (startingPath.numberOfPoints() == getNumberPoints()) {
+	if (startingPath.numberOfPoints() == getNumberOfPoints()) {
 		*out = reductionFunction(*out, Cycle(startingPath));
 		return;
 	}
@@ -74,16 +74,14 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 
 }
 
-Cycle Graph::getGreedyCycle() const {
+Cycle Graph::getGreedyCycle(const Point& start) const {
 	auto visited = std::set<Point>();
 	Cycle cycle;
-
-	//pick a random point to start
-	Point start = getNearestPoint(Point(0.5, 0.5));
+		
 	cycle.addPoint(start);
 	visited.insert(start);
 
-	while (visited.size() < getNumberPoints()) {
+	while (visited.size() < getNumberOfPoints()) {
 		for (Point p : getPointsByDistance(cycle.getLastPoint())) {
 			if (visited.count(p) == 0) { //unvisted
 				cycle.addPoint(p);
@@ -94,6 +92,12 @@ Cycle Graph::getGreedyCycle() const {
 	}
 
 	return cycle;
+}
+
+Cycle Graph::getGreedyCycle() const {
+	//pick a random point to start
+	Point start = getNearestPoint(Point(0.5, 0.5));
+	return getGreedyCycle(start);
 }
 
 
