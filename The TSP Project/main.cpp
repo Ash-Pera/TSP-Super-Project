@@ -47,12 +47,9 @@ void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 
 
 int main(int argc, char *argv[]) { 
-	//std::cout.imbue(std::locale(""));
-
-	for (int i = 1; i < 13; i++) {
-		timeExaustiveSearch(i, 10);
-	}
-
+	std::cout.imbue(std::locale(""));
+	Graph g = Graph(10);
+	std::cout << g.getGreedyCycle() << std::endl;
 	std::cin.get();
 
 }

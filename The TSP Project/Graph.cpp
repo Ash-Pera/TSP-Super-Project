@@ -75,17 +75,13 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 }
 
 Cycle Graph::getGreedyCycle(const Point& start) const {
-	auto visited = std::set<Point>();
 	Cycle cycle;
-		
 	cycle.addPoint(start);
-	visited.insert(start);
 
-	while (visited.size() < getNumberOfPoints()) {
-		for (Point p : getPointsByDistance(cycle.getLastPoint())) {
-			if (visited.count(p) == 0) { //unvisted
+	while (cycle.numberOfPoints() < getNumberOfPoints()) {
+		for (const Point p : getPointsByDistance(cycle.getLastPoint())) {
+			if (!cycle.containsPoint(p)) { //unvisted
 				cycle.addPoint(p);
-				visited.insert(p);
 				break;
 			}
 		}
