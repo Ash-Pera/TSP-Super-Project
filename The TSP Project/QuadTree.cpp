@@ -1,5 +1,15 @@
 #include "QuadTree.h"
 
+QuadTree::QuadTree(Point topLeftBound, Point bottomRightBound) :
+	topLeftBound(topLeftBound), bottomRightBound(bottomRightBound)
+{
+	topLeft = NULL;
+	topRight = NULL;
+	bottomLeft = NULL;
+	bottomRight = NULL;
+	data = NULL;
+}
+
 void QuadTree::insert(Point* p)
 {
 	// nothing in region

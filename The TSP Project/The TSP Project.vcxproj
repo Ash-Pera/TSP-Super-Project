@@ -126,7 +126,7 @@
   <ItemGroup>
     <ClInclude Include="Cycle.h" />
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="path.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="QuadTree.h" />
   </ItemGroup>

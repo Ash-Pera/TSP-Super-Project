@@ -1,11 +1,9 @@
 #pragma once
-#include "path.h"
-class Cycle :
-	public Path {
+#include "Path.h"
+class Cycle : public Path {
 public:
 	Cycle();
 	Cycle(Path);
-	double length() const;
-
+	double length() const override;
 };
 

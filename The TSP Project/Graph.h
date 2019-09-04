@@ -25,8 +25,6 @@ public:
 	Cycle reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const Cycle c2)) const;
 	Cycle getGreedyCycle() const;
 
-	//std::unordered_set<Point> getPoints() const;
-
 	friend std::ostream & operator << (std::ostream &out, const Graph &g);
 };
 

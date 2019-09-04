@@ -13,7 +13,7 @@ class QuadTree
 	Point* data;
 
 public:
-	QuadTree();
+	QuadTree(Point topLeftBound, Point bottomRightBound);
 	~QuadTree();
 
 	void insert(Point* p);
