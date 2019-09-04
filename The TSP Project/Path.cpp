@@ -1,7 +1,6 @@
 #include "path.h"
 
 
-
 Path::Path() {
 	points = std::vector<Point>();
 }

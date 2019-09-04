@@ -46,9 +46,14 @@ void timeGreedySearch(int sizeOfGraph, int numberOfTimes) {
 
 
 
+
 int main(int argc, char *argv[]) { 
-	std::cout.imbue(std::locale(""));
-	Graph g = Graph(10);
+	//std::cout.imbue(std::locale(""));
+
+
+
+	Graph g = Graph(std::stringstream("0 0 10 0 0 5 10 5"));
+
 	std::cout << g.getGreedyCycle() << std::endl;
 	std::cin.get();
 

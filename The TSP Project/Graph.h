@@ -7,6 +7,8 @@
 
 
 #include <iostream> 
+#include <sstream>
+#include <fstream>
 
 class Graph {
 private:
@@ -17,6 +19,7 @@ private:
 public:
 	Graph(unsigned int);
 	Graph(std::unordered_set<Point>);
+	Graph(std::stringstream);
 
 	unsigned int getNumberOfPoints() const;
 	Point getNearestPoint(Point) const;

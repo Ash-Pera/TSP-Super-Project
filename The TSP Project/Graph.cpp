@@ -21,6 +21,15 @@ Graph::Graph(unsigned int numberOfNodes) {
 
 Graph::Graph(std::unordered_set<Point> points) : points(points) { }
 
+Graph::Graph(std::stringstream input) {
+	while (!input.eof()) {
+		int x_chord, y_chord;
+		input >> x_chord;
+		input >> y_chord;
+		this->points.insert(Point(x_chord, y_chord));
+	}
+}
+
 
 
 // runs in n time
@@ -31,7 +40,7 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 		sorted.push_back(point);
 	}
 	std::sort(sorted.begin(), sorted.end(), [p](const Point& a, const Point& b) {
-		return p.distanceTo(a) > p.distanceTo(b);	});
+		return p.distanceTo(a) < p.distanceTo(b);	});
 	return sorted;
 }
 
@@ -77,6 +86,7 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 Cycle Graph::getGreedyCycle(const Point& start) const {
 	Cycle cycle;
 	cycle.addPoint(start);
+	auto visited = std::unordered_set<Point>();
 
 	while (cycle.numberOfPoints() < getNumberOfPoints()) {
 		for (const Point p : getPointsByDistance(cycle.getLastPoint())) {
@@ -86,7 +96,6 @@ Cycle Graph::getGreedyCycle(const Point& start) const {
 			}
 		}
 	}
-
 	return cycle;
 }
 
