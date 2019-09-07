@@ -32,7 +32,7 @@ Graph::Graph(std::stringstream input) {
 
 
 
-// runs in n time
+// runs in n log n time
 std::vector<Point> Graph::getPointsByDistance(Point p) const {
 	auto sorted = std::vector<Point>();
 	sorted.reserve(getNumberOfPoints());
@@ -44,19 +44,17 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 	return sorted;
 }
 
+
 //runs in n, returns null if all points visited
-Point Graph::getNearestUnvisitedPoint( Point searchPoint, std::unordered_set<Point>& visted) const
+Point Graph::getNearestUnvisitedPoint( Point searchPoint, std::unordered_set<Point>& unvisted) const
 {
-	Point* bestSoFar = nullptr;
-	for (Point p : this->points) {
-		if (visted.count(p) == 0) { //unvisted
-			if (bestSoFar == nullptr ||
-				searchPoint.distanceTo(p) < searchPoint.distanceTo(*bestSoFar)) {
-				*bestSoFar = p;
+	Point bestSoFar = *unvisted.begin();
+	for (Point p : unvisted) {
+			if (searchPoint.distanceTo(p) < searchPoint.distanceTo(bestSoFar)) {
+				bestSoFar = p;
 			}
-		}
 	}
-	return *bestSoFar;
+	return bestSoFar;
 }
 
 
@@ -101,15 +99,13 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 Cycle Graph::getGreedyCycle(const Point& start) const {
 	Cycle cycle;
 	cycle.addPoint(start);
-	auto visited = std::unordered_set<Point>();
+	auto unvisited = std::unordered_set<Point>(this->points);
+	unvisited.erase(start);
 
 	while (cycle.numberOfPoints() < getNumberOfPoints()) {
-		for (const Point p : getPointsByDistance(cycle.getLastPoint())) {
-			if (!cycle.containsPoint(p)) { //unvisted
-				cycle.addPoint(p);
-				break;
-			}
-		}
+		Point lastPoint = cycle.getLastPoint();
+		unvisited.erase(lastPoint);
+		cycle.addPoint(getNearestUnvisitedPoint(lastPoint, unvisited));
 	}
 	return cycle;
 }
