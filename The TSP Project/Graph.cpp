@@ -46,7 +46,7 @@ std::vector<Point> Graph::getPointsByDistance(Point p) const {
 
 
 //runs in n, returns null if all points visited
-Point Graph::getNearestUnvisitedPoint( Point searchPoint, std::unordered_set<Point>& unvisted) const
+Point Graph::getNearestUnvisitedPoint( Point searchPoint, std::unordered_set<Point>& unvisted)
 {
 	Point bestSoFar = *unvisted.begin();
 	for (Point p : unvisted) {

@@ -25,7 +25,7 @@ public:
 	Point getNearestPoint(Point) const;
 	std::vector<Point> getPointsByDistance(Point) const;
 
-	Point getNearestUnvisitedPoint(Point, std::unordered_set<Point>& visted) const;
+	static Point getNearestUnvisitedPoint(Point, std::unordered_set<Point>& visted);
 	
 	Cycle getGreedyCycle(const Point&) const;
 	Cycle getGreedyCycle() const;
