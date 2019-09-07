@@ -98,6 +98,7 @@ Cycle Graph::reduceOverAllCycles(Cycle(*reductionFunction)(const Cycle c1, const
 
 Cycle Graph::getGreedyCycle(const Point& start) const {
 	Cycle cycle;
+	cycle.reserve(getNumberOfPoints());
 	cycle.addPoint(start);
 	auto unvisited = std::unordered_set<Point>(this->points);
 	unvisited.erase(start);

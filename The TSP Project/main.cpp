@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
 
 
 
-	Graph g = Graph(std::stringstream("0 0 10 0 0 5 10 5"));
-
-	std::cout << g.getGreedyCycle() << std::endl;
+	//Graph g = Graph(std::stringstream("0 0 10 0 0 5 10 5"));
+	timeGreedySearch(1000, 10);
+	//std::cout << g.getGreedyCycle() << std::endl;
 	std::cin.get();
 
 }

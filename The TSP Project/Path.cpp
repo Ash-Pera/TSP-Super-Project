@@ -36,6 +36,10 @@ bool Path::containsPoint(Point p) const {
 	return std::find(points.begin(), points.end(), p) != points.end();
 }
 
+void Path::reserve(int n) {
+	this->points.reserve(n);
+}
+
 // amortized const time
 Path Path::operator+(const Point & p) {
 	Path newPath = *this;

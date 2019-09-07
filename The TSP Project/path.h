@@ -15,6 +15,8 @@ public:
 	int numberOfPoints() const { return (int)points.size(); };
 	Point getLastPoint() const;
 	bool containsPoint(Point) const;
+	void reserve(int n);
+
 
 	friend std::ostream & operator << (std::ostream &out, const Path &p);
 	Path operator+(const Point&);
